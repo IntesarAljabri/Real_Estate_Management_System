@@ -1,0 +1,30 @@
+package Real_Estate_Management_System.MyProject.Models;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.*;
+import java.util.Date;
+import java.util.List;
+
+@Data
+@Setter
+@Getter
+@Entity
+@Table(name = "listings")
+public class Listing extends BaseEntity{
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    long id;
+
+    Date datePosted;
+
+    @OneToMany
+    @JoinColumn(name = "propertyId", referencedColumnName = "id")
+    List<Property> properties;
+
+    @ManyToOne
+    @JoinColumn(name = "agentId", referencedColumnName = "id")
+    Agent agent;
+}
